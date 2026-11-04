@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>おもさ の べんきょう（おおきなかぶ・おもさくらべ）</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <header class="topbar">
+    <h1 class="title">おもさ の べんきょう</h1>
+
+    <nav class="tabs" role="tablist" aria-label="べんきょうを えらぶ">
+      <button id="tabKabu" class="tab active" role="tab" aria-selected="true" type="button">
+        <span class="num">1</span>おおきなかぶ
+      </button>
+      <button id="tabWeight" class="tab" role="tab" aria-selected="false" type="button">
+        <span class="num">2</span>おもさくらべ
+      </button>
+    </nav>
+
+    <div class="tools">
+      <button id="soundBtn" class="tool" type="button" aria-pressed="true">🔊 おと</button>
+      <button id="fullBtn" class="tool" type="button">⛶ ぜんがめん</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== 1. おおきなかぶ ========== -->
+    <section id="kabuView" class="view" aria-label="おおきなかぶ">
+      <div class="status">
+        <ul id="crew" class="crew" aria-label="あつまった なかま"></ul>
+        <div id="stars" class="stars" aria-label="ひっぱった じかん"></div>
+      </div>
+
+      <div class="stage">
+        <canvas id="kabuCanvas" width="1280" height="720"
+                role="img" aria-label="おじいさんたちが おおきなかぶを ひっぱる ゲームの がめん"></canvas>
+      </div>
+
+      <div class="controls">
+        <button id="pullBtn" class="big-btn primary" type="button">
+          <kbd>Enter</kbd><span>おしつづけて ひっぱる</span>
+        </button>
+        <button id="addBtn" class="big-btn" type="button">
+          <kbd>↑</kbd><span>なかまを ふやす</span>
+        </button>
+      </div>
+
+      <p class="footnote">
+        せんせいへ：<kbd>Space</kbd> は <kbd>Enter</kbd> と同じ ／ <kbd>↓</kbd> ひとり へらす ／ <kbd>Esc</kbd> さいしょから ／ <kbd>1</kbd><kbd>2</kbd> がめん きりかえ
+      </p>
+    </section>
+
+    <!-- ========== 2. おもさくらべ ========== -->
+    <section id="weightView" class="view" aria-label="おもさくらべ" hidden>
+      <div class="stage balance-stage">
+        <svg id="balance" viewBox="0 0 1280 610" role="img" aria-label="てんびん。2つの ものを のせて おもさを くらべます">
+          <defs>
+            <linearGradient id="bgSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#d9f0ff"/>
+              <stop offset="1" stop-color="#fff7de"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="1280" height="610" fill="url(#bgSky)"/>
+          <!-- つくえ -->
+          <rect x="0" y="566" width="1280" height="44" fill="#d9c29a"/>
+          <rect x="0" y="566" width="1280" height="8" fill="#c4a874"/>
+          <!-- だい -->
+          <path d="M 500 566 L 780 566 L 726 524 L 554 524 Z" fill="#7a5a3c"/>
+          <rect x="624" y="220" width="32" height="310" rx="12" fill="#8f6b46"/>
+          <!-- うで -->
+          <g id="beam" transform="translate(640 220) rotate(0)">
+            <rect x="-370" y="-10" width="740" height="20" rx="10" fill="#d49a52"/>
+            <rect x="-370" y="-10" width="740" height="7" rx="3.5" fill="#e8b878"/>
+            <circle cx="-360" cy="0" r="11" fill="#6b4e31"/>
+            <circle cx="360" cy="0" r="11" fill="#6b4e31"/>
+          </g>
+          <circle cx="640" cy="220" r="24" fill="#6b4e31"/>
+          <circle cx="640" cy="220" r="9" fill="#e8b878"/>
+          <!-- さら（JSで作る） -->
+          <g id="panL" class="pan" tabindex="-1"></g>
+          <g id="panR" class="pan" tabindex="-1"></g>
+          <!-- うえの なまえ と ラベル -->
+          <g id="bannerL" transform="translate(280 0)"></g>
+          <g id="bannerR" transform="translate(1000 0)"></g>
+        </svg>
+      </div>
+
+      <ul id="palette" class="palette" aria-label="くらべる もの"></ul>
+
+      <div class="controls">
+        <button id="placeBtn" class="big-btn primary" type="button">
+          <kbd>Enter</kbd><span>のせる</span>
+        </button>
+        <button id="clearBtn" class="big-btn" type="button">
+          <kbd>Esc</kbd><span>もういちど</span>
+        </button>
+        <button id="numBtn" class="big-btn" type="button" aria-pressed="true">
+          <span>🔢 おもさの かず</span>
+        </button>
+      </div>
+
+      <p class="footnote">
+        せんせいへ：<kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> で ものを えらぶ ／ <kbd>Enter</kbd> か <kbd>Space</kbd> で のせる（ひだり → みぎ の じゅんばん）／ さらを クリックすると はずせます ／ <kbd>1</kbd><kbd>2</kbd> がめん きりかえ
+      </p>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
